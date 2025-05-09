@@ -41,6 +41,17 @@ switch (scenario) {
     };
     break;
 
+  case 'endurance_test_10_rate':
+    options.scenarios.endurance_test_10_rate = {
+      executor: 'constant-arrival-rate',
+      rate: 10,
+      timeUnit: '1s',
+      duration: '10m',
+      preAllocatedVUs: 50,
+      maxVUs: 10000,
+    };
+    break;
+
   case 'spike_test_300_rate':
     options.scenarios.spike_test_300_rate = {
       executor: 'ramping-arrival-rate',
