@@ -60,7 +60,7 @@ const pure_waiting_time_gauge = new Gauge(
 );
 
 export default function () {
-  let url = 'http://localhost:13000/proxy';
+  let url = 'http://70.12.205.117:13000/proxy';
 
   let res;
 

@@ -28,6 +28,7 @@ services:
     networks:
       - default
       - gms
+      - host
     volumes:
       - ./scripts:/scripts
     stdin_open: true
