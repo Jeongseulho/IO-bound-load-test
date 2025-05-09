@@ -28,7 +28,8 @@ services:
     networks:
       - default
       - gms
-      - host
+    extra_hosts:
+      - '70.12.205.117:70.12.205.117'
     volumes:
       - ./scripts:/scripts
     stdin_open: true
