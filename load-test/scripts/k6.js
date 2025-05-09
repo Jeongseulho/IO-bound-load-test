@@ -13,7 +13,7 @@ switch (scenario) {
       executor: 'constant-arrival-rate',
       rate: 200,
       timeUnit: '1s',
-      duration: '1h',
+      duration: '10m',
       preAllocatedVUs: 50,
       maxVUs: 10000,
     };
