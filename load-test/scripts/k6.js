@@ -7,90 +7,26 @@ export const options = {
   scenarios: {},
 };
 
+// 🔹 증가 구간: startRate → peakRate
+const increasingStages = (start, peak, step, stepDuration) =>
+  Array.from({ length: (peak - start) / step + 1 }, (_, i) => ({
+    duration: stepDuration,
+    target: start + i * step,
+  }));
+
+// 🔹 감소 구간: peakRate → startRate
+const decreasingStages = (start, peak, step, stepDuration) =>
+  [...increasingStages(start, peak, step, stepDuration)].reverse();
+
 switch (scenario) {
-  case 'endurance_test_200_rate':
-    options.scenarios.endurance_test_200_rate = {
-      executor: 'constant-arrival-rate',
-      rate: 200,
-      timeUnit: '1s',
-      duration: '10m',
-      preAllocatedVUs: 50,
-      maxVUs: 10000,
-    };
-    break;
-
-  case 'endurance_test_100_rate':
-    options.scenarios.endurance_test_100_rate = {
-      executor: 'constant-arrival-rate',
-      rate: 100,
-      timeUnit: '1s',
-      duration: '10m',
-      preAllocatedVUs: 50,
-      maxVUs: 10000,
-    };
-    break;
-
-  case 'endurance_test_50_rate':
-    options.scenarios.endurance_test_50_rate = {
-      executor: 'constant-arrival-rate',
-      rate: 50,
-      timeUnit: '1s',
-      duration: '10m',
-      preAllocatedVUs: 50,
-      maxVUs: 10000,
-    };
-    break;
-
-  case 'endurance_test_10_rate':
-    options.scenarios.endurance_test_10_rate = {
-      executor: 'constant-arrival-rate',
-      rate: 10,
-      timeUnit: '1s',
-      duration: '10m',
-      preAllocatedVUs: 50,
-      maxVUs: 10000,
-    };
-    break;
-
-  case 'endurance_test_20_rate':
-    options.scenarios.endurance_test_20_rate = {
-      executor: 'constant-arrival-rate',
-      rate: 20,
-      timeUnit: '1s',
-      duration: '10m',
-      preAllocatedVUs: 50,
-      maxVUs: 10000,
-    };
-    break;
-
-  case 'endurance_test_30_rate':
-    options.scenarios.endurance_test_30_rate = {
-      executor: 'constant-arrival-rate',
-      rate: 30,
-      timeUnit: '1s',
-      duration: '10m',
-      preAllocatedVUs: 50,
-      maxVUs: 10000,
-    };
-    break;
-
-  case 'spike_test_300_rate':
-    options.scenarios.spike_test_300_rate = {
+  case '10_rate_to_200_rate':
+    options.scenarios.ramping_10_to_20_rate = {
       executor: 'ramping-arrival-rate',
-      startRate: 50,
+      startRate: 10,
       timeUnit: '1s',
-      stages: [
-        {
-          duration: '30s',
-          target: 300,
-        },
-        {
-          duration: '3m',
-          target: 50,
-        },
-      ],
       preAllocatedVUs: 50,
       maxVUs: 10000,
+      stages: increasingStages(10, 200, 10, '30s'),
     };
     break;
 
