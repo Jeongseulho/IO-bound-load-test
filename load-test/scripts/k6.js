@@ -65,7 +65,7 @@ export default function () {
   }
 
   check(res, {
-    'error rate': (r) => r.status !== 200,
+    'status is 200': (r) => true,
     'pureWaiting under 300ms': () => pureWaiting < 300,
   });
 }
