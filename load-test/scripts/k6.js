@@ -19,14 +19,21 @@ const decreasingStages = (start, peak, step, stepDuration) =>
   [...increasingStages(start, peak, step, stepDuration)].reverse();
 
 switch (scenario) {
-  case '10_rate_to_200_rate':
-    options.scenarios.ramping_10_to_20_rate = {
-      executor: 'ramping-arrival-rate',
-      startRate: 10,
-      timeUnit: '1s',
-      preAllocatedVUs: 50,
-      maxVUs: 10000,
-      stages: increasingStages(10, 200, 10, '30s'),
+  case '50_vus_to_200_vus':
+    options.scenarios.ramping_vus = {
+      executor: 'ramping-vus',
+      startVUs: 50,
+      stages: [
+        { duration: '30s', target: 60 },
+        { duration: '30s', target: 70 },
+        { duration: '30s', target: 80 },
+        { duration: '30s', target: 90 },
+        { duration: '30s', target: 100 },
+        { duration: '30s', target: 120 },
+        { duration: '30s', target: 150 },
+        { duration: '30s', target: 200 },
+      ],
+      gracefulRampDown: '10s',
     };
     break;
 
