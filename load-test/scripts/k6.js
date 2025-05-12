@@ -24,7 +24,7 @@ switch (scenario) {
       executor: 'constant-arrival-rate',
       rate: 20, // 초당 요청 수
       timeUnit: '1s', // 요청 속도 단위
-      duration: '20s', // 총 테스트 시간
+      duration: '5m', // 총 테스트 시간
       preAllocatedVUs: 50, // 기본 할당 VUs
       maxVUs: 1000, // 요청 처리용 최대 VUs (충분히 크게 설정)
     };
