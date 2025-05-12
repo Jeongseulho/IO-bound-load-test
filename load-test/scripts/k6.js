@@ -19,21 +19,14 @@ const decreasingStages = (start, peak, step, stepDuration) =>
   [...increasingStages(start, peak, step, stepDuration)].reverse();
 
 switch (scenario) {
-  case '50_vus_to_200_vus':
-    options.scenarios.ramping_vus = {
-      executor: 'ramping-vus',
-      startVUs: 50,
-      stages: [
-        { duration: '30s', target: 60 },
-        { duration: '30s', target: 70 },
-        { duration: '30s', target: 80 },
-        { duration: '30s', target: 90 },
-        { duration: '30s', target: 100 },
-        { duration: '30s', target: 120 },
-        { duration: '30s', target: 150 },
-        { duration: '30s', target: 200 },
-      ],
-      gracefulRampDown: '10s',
+  case 'constant_20_rps_20s':
+    options.scenarios.constant_20_rps = {
+      executor: 'constant-arrival-rate',
+      rate: 20, // 초당 요청 수
+      timeUnit: '1s', // 요청 속도 단위
+      duration: '20s', // 총 테스트 시간
+      preAllocatedVUs: 50, // 기본 할당 VUs
+      maxVUs: 1000, // 요청 처리용 최대 VUs (충분히 크게 설정)
     };
     break;
 
